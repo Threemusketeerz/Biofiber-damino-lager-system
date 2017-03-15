@@ -1,23 +1,28 @@
 
 $(document).ready(function(){
     $.getJSON("results.json", function(objArr) {
+		jsonSorter(objArr);
+
+		//Virker ikke helt, men næsten
+		objArr.sort(sortJsonDate);
 		objArr.sort(sortJson);
-		console.log(objArr);
+		// console.log(objArr);
         /*Sortere object array efter dato*/
-        // objArr.sort(function(a, b) {
-        //     a = new Date(a.Dato);
-        //     b = new Date(b.Dato);
-        //     return a > b ? -1 : a < b ? 1 : 0;
-        // });
 
         htmlTable(".container", objArr);
         $("table").addClass("table table-responsive table-striped table-hover");
-        console.log(objArr);
+        // console.log(objArr);
     })
 });
 
 
 //Sorts data according to Lokation, with the smallest value first.
+function sortJsonDate(a, b) {
+	a = new Date(a.Dato);
+	b = new Date(b.Dato);
+	return a > b ? -1 : a < b ? 1 : 0;
+}
+
 function sortJson(a, b) {
 	a = a.Lokation;
 	b = b.Lokation;
