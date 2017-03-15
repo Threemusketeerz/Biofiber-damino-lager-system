@@ -1,22 +1,10 @@
 
-$(document).ready(function(){
-    $.getJSON("results.json", function(objArr) {
-		jsonSorter(objArr);
-
-		//Virker ikke helt, men næsten
-		objArr.sort(sortJsonDate);
-		objArr.sort(sortJson);
-		// console.log(objArr);
-        /*Sortere object array efter dato*/
-
-        htmlTable(".container", objArr);
-        $("table").addClass("table table-responsive table-striped table-hover");
-        // console.log(objArr);
-    })
+$(document).ready(function(){	
+	htmlTable(".container", objArr);
+	$("table").addClass("table table-responsive table-striped table-hover");
 });
-
-
 //Sorts data according to Lokation, with the smallest value first.
+
 function sortJsonDate(a, b) {
 	a = new Date(a.Dato);
 	b = new Date(b.Dato);
