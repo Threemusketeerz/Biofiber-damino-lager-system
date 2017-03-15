@@ -2,7 +2,6 @@
 // $(document).ready(function(){	
 	 $.getJSON("results.json", function(data) {
 		var finArr = jsonSorter(data);
-		console.log(data);
 		htmlTable(".container", finArr);
         $("table").addClass("table table-responsive table-striped table-hover");
     });

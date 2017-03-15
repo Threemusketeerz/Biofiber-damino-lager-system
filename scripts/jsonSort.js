@@ -30,3 +30,14 @@ function jsonSorter(objArr) {
     // console.log(newObjArr);
 };
 
+function sortJsonDate(a, b) {
+	a = new Date(a.Dato);
+	b = new Date(b.Dato);
+	return a > b ? -1 : a < b ? 1 : 0;
+};
+
+function sortJson(a, b) {
+	a = a.Lokation;
+	b = b.Lokation;
+	return a < b ? -1 : a > b ? 1 : 0;
+};
