@@ -1,24 +1,11 @@
 
 // $(document).ready(function(){	
-	 $.getJSON("results.json", function(data) {
+	 $.getJSON("scripts/results.json", function(data) {
 		var finArr = jsonSorter(data);
+		console.log(finArr);
 		htmlTable(".container", finArr);
         $("table").addClass("table table-responsive table-striped table-hover");
     });
-// });
-//Sorts data according to Lokation, with the smallest value first.
-
-function sortJsonDate(a, b) {
-	a = new Date(a.Dato);
-	b = new Date(b.Dato);
-	return a > b ? -1 : a < b ? 1 : 0;
-}
-
-function sortJson(a, b) {
-	a = a.Lokation;
-	b = b.Lokation;
-	return a < b ? -1 : a > b ? 1 : 0;
-};
 /*All credit to agershun for the htmlTable() function,  
 *2nd answer on http://stackoverflow.com/questions/27681838/create-table-with-javascript-array-and-object
 */
