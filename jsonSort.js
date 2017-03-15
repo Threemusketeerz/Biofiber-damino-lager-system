@@ -2,6 +2,7 @@ function jsonSorter(objArr) {
     var newObjArr = [];
     var obj;
     var objKeys;
+    objArr.sort(sortJsonDate);
 
     if ((!objKeys) || objKeys.length == 0) {
         objKeys = Object.keys(objArr[0]);
@@ -24,8 +25,7 @@ function jsonSorter(objArr) {
             }
         }
     }
-
-    console.log("New Arr");
+    newObjArr = newObjArr.sort(sortJson);
     console.log(newObjArr);
 };
 
