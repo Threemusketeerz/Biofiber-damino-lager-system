@@ -36,12 +36,10 @@ function htmlTable(selector, data, columns) {
 	tbe.appendChild(tbody);
 	for (var j = 0; j < data.length; j++){
 		var tre = document.createElement('tr');
-		if(!(data[j].hasOwnProperty("Historik"))) {
-			for (var i = 0; i < columns.length; i++){
-				var the = document.createElement('td');
-				the.textContent = data[j][columns[i]];
-				tre.appendChild(the);
-			}
+		for (var i = 0; i < columns.length - 1; i++){
+			var the = document.createElement('td');
+			the.textContent = data[j][columns[i]];
+			tre.appendChild(the);
 		}
 		tbody.appendChild(tre);
 	};
