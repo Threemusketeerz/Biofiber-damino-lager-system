@@ -11,20 +11,20 @@ function jsonSorter(objArr) {
     for (var i = 0; i < objArr.length; i++) {
         obj = objArr[i];
         var curVal = objArr[i]["Lokation"];
-
-        if (newObjArr.length === 0) {
-            newObjArr.push(obj);
-            console.log(newObjArr);
-        }
+        var curValD = objArr[i]["Dato"];
+        newObjArr.push(obj);
 
         for (var j = 0; j < newObjArr.length; j++) {
             var newVal = newObjArr[j]["Lokation"];
-            if (newVal === curVal) {
+            var newValD = newObjArr[j]["Dato"];
+            if (newVal === curVal && newValD !== curValD) {
                 newObjArr[j]["Historik"] = [];
                 newObjArr[j]["Historik"].push(objArr[i]);
+                newObjArr.pop();
             }
         }
     }
+
     console.log("New Arr");
     console.log(newObjArr);
 };
