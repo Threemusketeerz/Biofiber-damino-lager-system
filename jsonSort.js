@@ -6,7 +6,7 @@ function jsonSorter(objArr) {
 
     if ((!objKeys) || objKeys.length == 0) {
         objKeys = Object.keys(objArr[0]);
-        console.log(objKeys);
+        // console.log(objKeys);
     }
 
     for (var i = 0; i < objArr.length; i++) {
@@ -26,6 +26,7 @@ function jsonSorter(objArr) {
         }
     }
     newObjArr = newObjArr.sort(sortJson);
-    console.log(newObjArr);
+    return newObjArr;
+    // console.log(newObjArr);
 };
 
