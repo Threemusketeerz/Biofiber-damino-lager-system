@@ -1,13 +1,8 @@
 
-/*Only necessary when creating history for an existing row, which is not for now but later*/
-// function createHist(num) {
-    
-// }
-
 $(document).ready(function(){
     $.getJSON("results.json", function(objArr) {
 		objArr.sort(sortJson);
-
+		console.log(objArr);
         /*Sortere object array efter dato*/
         // objArr.sort(function(a, b) {
         //     a = new Date(a.Dato);
@@ -26,7 +21,7 @@ $(document).ready(function(){
 function sortJson(a, b) {
 	a = a.Lokation;
 	b = b.Lokation;
-	return a > b ? -1 : a < b ? 1 : 0;
+	return a < b ? -1 : a > b ? 1 : 0;
 };
 
 /*All credit to agershun for the htmlTable() function,  
@@ -34,6 +29,11 @@ function sortJson(a, b) {
 */
 function htmlTable(selector, data, columns) {
 	var sel = document.querySelector(selector);
+	var tbe = document.createElement('table');
+	var thead = document.createElement('thead');
+	var tre = document.createElement('tr');
+	var tbody = document.createElement('tbody');
+
 	if(!sel) {
 		throw new Error('Selected HTML element is not found');
 	};	
@@ -41,12 +41,8 @@ function htmlTable(selector, data, columns) {
 	if((!columns) || columns.length == 0) {
         columns = Object.keys(data[0]);
 	}
-
-	var tbe = document.createElement('table');
-	var thead = document.createElement('thead');
 	tbe.appendChild(thead);
 
-    var tre = document.createElement('tr');
     for (var i = 0; i < columns.length; i++){
         var the = document.createElement('th');
         the.textContent = columns[i];
@@ -54,7 +50,6 @@ function htmlTable(selector, data, columns) {
     }
     thead.appendChild(tre);
 
-	var tbody = document.createElement('tbody');
 	tbe.appendChild(tbody);
 	for (var j = 0; j < data.length; j++){
 		var tre = document.createElement('tr');
