@@ -35,14 +35,34 @@ function htmlTable(selector, data, columns) {
 
 	tbe.appendChild(tbody);
 	for (var j = 0; j < data.length; j++){
+		var d = data[j]["Historik"];
 		var tre = document.createElement('tr');
 		for (var i = 0; i < columns.length - 1; i++){
 			var the = document.createElement('td');
 			the.textContent = data[j][columns[i]];
+			// console.log(data[j][columns[i]]);
 			tre.appendChild(the);
+			// console.log(tre.appendChild(the));
 		}
 		tbody.appendChild(tre);
+
+		//Own code for Historik
+		if(columns[i] === "Historik" && data[j][columns[i]] !== undefined) {
+			for (var k = 0; k < d.length; k++)  {
+				var subtr = document.createElement('tr');
+				// console.log(d[k][columns[i]]);
+				for(var z = 0; z < columns.length; z++) {
+					// console.log(d[k][columns[z]]);
+					var sub = document.createElement('td');
+					sub.textContent = d[k][columns[z]];
+					console.log(subtr.appendChild(sub));
+					subtr.appendChild(sub);
+				}
+				tbody.appendChild(subtr);
+			}
+		}
 	};
+
 	// emptyDOMChildren(sel);
 	sel.appendChild(tbe);
 };
