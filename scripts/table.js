@@ -38,11 +38,32 @@ function htmlTable(selector, data, columns) {
 		var tre = document.createElement('tr');
 		for (var i = 0; i < columns.length - 1; i++){
 			var the = document.createElement('td');
+			the.className = "clicked";
+		
 			the.textContent = data[j][columns[i]];
 			tre.appendChild(the);
+	
 		}
+		
 		tbody.appendChild(tre);
 	};
 	// emptyDOMChildren(sel);
 	sel.appendChild(tbe);
+	$(".clicked").click(function() {
+		// console.log(data);
+		for (var i = 0; i < data.length; i++){
+			// console.log(data[i]["Historik"]);
+			if(data[i]["Historik"] !== undefined){
+			var hist = data[i]["Historik"];
+				for(var j = 0; j < hist.length; j++){
+					if(hist[j]["Lokation"] === data[i]["Lokation"]){
+						console.log(data[i]["Historik"][j].Lokation);
+					}
+				
+				}
+			}
+		}
+	});
 };
+
+
