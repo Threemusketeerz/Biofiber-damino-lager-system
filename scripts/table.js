@@ -56,6 +56,7 @@ function htmlTable(selector, data, columns) {
 					var sub = document.createElement('td');
 					sub.textContent = d[k][columns[z]];
 					sub.id = 'sub' + j;
+					sub.style = 'display: none';
 					console.log(subtr.appendChild(sub));
 					subtr.appendChild(sub);
 				}
