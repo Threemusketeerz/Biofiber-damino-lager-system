@@ -103,7 +103,6 @@ function htmlTable(selector, data, columns) {
 		//kører over hver tr 
 		$("tr").each(function(){
 			$(this).css({"background-color": "#5BC0DE", "color": "white"});
-			$(".head").css({"background-color": "none", "color": "none"});
 			//henter id til array
 			var Id = $(this).attr('id');
 			if(Id !== undefined){
