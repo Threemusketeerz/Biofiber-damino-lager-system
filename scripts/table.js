@@ -1,3 +1,4 @@
+
 // $(document).ready(function(){	
 $.getJSON("scripts/results.json", function(data) {
 	var finArr = jsonSorter(data);
@@ -39,7 +40,7 @@ function htmlTable(selector, data, columns) {
 	for (var j = 0; j < data.length; j++){
 		var d = data[j]["Historik"];
 		var tre = document.createElement('tr');
-		
+		tre.className = "hidden" + j;
 		for (var i = 0; i < columns.length - 1; i++){
 
 			var the = document.createElement('td');
@@ -93,51 +94,45 @@ function htmlTable(selector, data, columns) {
 	sel.appendChild(tbe);
 	// Function til hide ad historik
 	$("tr").show(function(){
-	var hid = "hidden";
-	//opretter array der holder alle id som bliver brugt til at hide historik
-	var retval = [];
-	//kører over hver tr 
-	$("tr").each(function(){
-		//henter id til array
-		var Id = $(this).attr('id');
-		if(Id !== undefined){
-
-		retval.push(Id);
-			
-		}
-		//kører over hvert element i array så jeg kan hide historik
-		for(var i = 0; i < retval.length; i++){
-			//Simpel if statement til at hide historik. Sammenligner bare id med array
-			if($(this).attr('id') == retval[i]){
-				$(this).hide();
-			}
-			
-		}
-		
-	})
-console.log(retval);
-
-	
-});
-//click function er basicly det samme ud over det sker når der bliver trykket
-$("tr").click(function(){
-	$("tr").each(function(){
+		var hid = "hidden";
+		//opretter array der holder alle id som bliver brugt til at hide historik
 		var retval = [];
-
-		var Id = $(this).attr('id');
-		if(Id !== undefined){
-		retval.push(Id);
-			
-		}
-		var Id = $(this).attr('id');
-		for(var i = 0; i < retval.length; i++){
-			if($(this).attr('id') == retval[i]){
-				//istedet for hide(); er det show(); når et table row bliver clicked
-				$(this).show();
+		//kører over hver tr 
+		$("tr").each(function(){
+			//henter id til array
+			var Id = $(this).attr('id');
+			if(Id !== undefined){
+				retval.push(Id);	
 			}
-		}
-	})
-});
-
-
+			//kører over hvert element i array så jeg kan hide historik
+			for(var i = 0; i < retval.length; i++){
+				//Simpel if statement til at hide historik. Sammenligner bare id med array
+				if($(this).attr('id') == retval[i]){
+					$(this).hide();
+				}
+				
+			}
+			
+		})
+	});
+//click function er basicly det samme ud over det sker når der bliver trykket
+	$("tr").click(function(event){
+		/*Istedet for at have retval array i each funktionen har jeg lagt den udenfor
+		så det ikke skubber alle classNames men kun det der bliver trykket på*/
+		var retval = [];
+		var Class = $(this).attr('class');
+			if(Class !== undefined){
+				retval.push(Class);	
+			}	
+		$("tr").each(function(){
+			var Id = $(this).attr('id');
+			for(var i = 0; i < retval.length; i++){
+				if(Id == retval[i]){
+					//Toggle funktion viser og gemmer historik + giver en dejlig effekt
+					$(this).toggle(500);
+				}
+			}	
+		})
+		console.log($(this).attr('class'));
+	});
 };
