@@ -1,4 +1,3 @@
-
 // $(document).ready(function(){	
 $.getJSON("scripts/results.json", function(data) {
 	var finArr = jsonSorter(data);
@@ -40,7 +39,7 @@ function htmlTable(selector, data, columns) {
 	for (var j = 0; j < data.length; j++){
 		var d = data[j]["Historik"];
 		var tre = document.createElement('tr');
-			tre.id = "log" + j;
+		
 		for (var i = 0; i < columns.length - 1; i++){
 
 			var the = document.createElement('td');
@@ -92,17 +91,23 @@ function htmlTable(selector, data, columns) {
 
 	// emptyDOMChildren(sel);
 	sel.appendChild(tbe);
-
-$("td").show(function(){
+	// Function til hide ad historik
+	$("tr").show(function(){
 	var hid = "hidden";
+	//opretter array der holder alle id som bliver brugt til at hide historik
 	var retval = [];
-	$("td").each(function(){
+	//kører over hver tr 
+	$("tr").each(function(){
+		//henter id til array
 		var Id = $(this).attr('id');
 		if(Id !== undefined){
+
 		retval.push(Id);
 			
 		}
+		//kører over hvert element i array så jeg kan hide historik
 		for(var i = 0; i < retval.length; i++){
+			//Simpel if statement til at hide historik. Sammenligner bare id med array
 			if($(this).attr('id') == retval[i]){
 				$(this).hide();
 			}
@@ -114,8 +119,9 @@ console.log(retval);
 
 	
 });
+//click function er basicly det samme ud over det sker når der bliver trykket
 $("tr").click(function(){
-	$("td").each(function(){
+	$("tr").each(function(){
 		var retval = [];
 
 		var Id = $(this).attr('id');
@@ -126,10 +132,12 @@ $("tr").click(function(){
 		var Id = $(this).attr('id');
 		for(var i = 0; i < retval.length; i++){
 			if($(this).attr('id') == retval[i]){
+				//istedet for hide(); er det show(); når et table row bliver clicked
 				$(this).show();
 			}
 		}
 	})
 });
+
 
 };
