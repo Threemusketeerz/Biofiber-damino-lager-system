@@ -29,6 +29,8 @@ function htmlTable(selector, data, columns) {
 	tbe.appendChild(thead);
     for (var i = 0; i < columns.length; i++){
         var the = document.createElement('th');
+		the.className = "head";
+		
 		if (columns[i] !== "Historik"){
         	the.textContent = columns[i];
 		}
@@ -41,6 +43,7 @@ function htmlTable(selector, data, columns) {
 		var d = data[j]["Historik"];
 		var tre = document.createElement('tr');
 		tre.className = "hidden" + j;
+		
 		for (var i = 0; i < columns.length - 1; i++){
 
 			var the = document.createElement('td');
@@ -99,6 +102,8 @@ function htmlTable(selector, data, columns) {
 		var retval = [];
 		//kører over hver tr 
 		$("tr").each(function(){
+			$(this).css({"background-color": "#5BC0DE", "color": "white"});
+			$(".head").css({"background-color": "none", "color": "none"});
 			//henter id til array
 			var Id = $(this).attr('id');
 			if(Id !== undefined){
@@ -126,13 +131,16 @@ function htmlTable(selector, data, columns) {
 			}	
 		$("tr").each(function(){
 			var Id = $(this).attr('id');
+			
 			for(var i = 0; i < retval.length; i++){
 				if(Id == retval[i]){
 					//Toggle funktion viser og gemmer historik + giver en dejlig effekt
 					$(this).toggle(500);
+					$(this).css({"background-color": "#4B7089", "color": "white", "padding-left": "50px"});
 				}
 			}	
 		})
 		console.log($(this).attr('class'));
 	});
 };
+
