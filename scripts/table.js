@@ -1,4 +1,10 @@
 
+/*This code i used to sort mysql data.
+The code sorts data and outputs the latest data sorted after a location/date.
+It has history properties wich saves the data, and can be retrived by clicking on a table row.
+Fell free to ask "Threemusketeerz", "Sporring55" if you have any questions about the code*/
+
+
 // $(document).ready(function(){	
 $.getJSON("scripts/results.json", function(data) {
 	var finArr = jsonSorter(data);
@@ -17,6 +23,7 @@ function htmlTable(selector, data, columns) {
 	var thead = document.createElement('thead');
 	var tre = document.createElement('tr');
 	var tbody = document.createElement('tbody');
+	tbody.className = "myTable";
 	var Class = "clicked";
 
 	if(!sel) {
@@ -43,103 +50,88 @@ function htmlTable(selector, data, columns) {
 		var d = data[j]["Historik"];
 		var tre = document.createElement('tr');
 		tre.className = "hidden" + j;
-		
 		for (var i = 0; i < columns.length - 1; i++){
-
 			var the = document.createElement('td');
-			
 			the.textContent = data[j][columns[i]];
-			// console.log(data[j][columns[i]]);
 			tre.appendChild(the);
-			// console.log(tre.appendChild(the));
-		
 		}
 		tbody.appendChild(tre);
-
 		//Own code for Historik
 		if(columns[i] === "Historik" && data[j][columns[i]] !== undefined) {
-			
 			for (var k = 0; k < d.length; k++)  {
-				var div = "<div></div>";
-				
+				var div = "<div></div>";				
 				var subtr = document.createElement('tr');
 				subtr.id = "hidden" + j;
-				
-
-				// subtr.style = 'display: none';
-				
-				
-				// console.log(d[k][columns[i]]);
 				for(var z = 0; z < columns.length; z++) {
-					// console.log(d[k][columns[z]]);
 					var sub = document.createElement('td');
-					
 					sub.textContent = d[k][columns[z]];
 					sub.id = 'sub' + j;
-
-					subtr.appendChild(sub);
-					
-			}
-				
-					
+					subtr.appendChild(sub);	
+			}			
 				tbody.appendChild(subtr);
 
 			}
-		
-			
-		}
-		
-		
+		}	
 	};
 	
 
 	// emptyDOMChildren(sel);
 	sel.appendChild(tbe);
-	// Function til hide ad historik
+	// Function for hiding history
 	$("tr").show(function(){
 		var hid = "hidden";
-		//opretter array der holder alle id som bliver brugt til at hide historik
+		//Color for valid tables
+		$(this).css({"background-color": "#5BC0DE", "color": "white"});
+		//array: keeps id of hidden tables 
 		var retval = [];
-		//kører over hver tr 
+		//running for every table row
 		$("tr").each(function(){
-			$(this).css({"background-color": "#5BC0DE", "color": "white"});
-			//henter id til array
+			//Getting id of hidden 
 			var Id = $(this).attr('id');
 			if(Id !== undefined){
 				retval.push(Id);	
 			}
-			//kører over hvert element i array så jeg kan hide historik
+			//Running for loop through array so history is hidden
 			for(var i = 0; i < retval.length; i++){
-				//Simpel if statement til at hide historik. Sammenligner bare id med array
+				//Simpel if statement for hiding history
 				if($(this).attr('id') == retval[i]){
 					$(this).hide();
 				}
 				
 			}
-			
 		})
 	});
-//click function er basicly det samme ud over det sker når der bliver trykket
+//click function: click function is bacisly the same as hide function with small modifications
 	$("tr").click(function(event){
-		/*Istedet for at have retval array i each funktionen har jeg lagt den udenfor
-		så det ikke skubber alle classNames men kun det der bliver trykket på*/
-		var retval = [];
+		/*putting my push function outside of each function so it only pushes
+		the class of the clicked table row*/
+		var retclass = [];
 		var Class = $(this).attr('class');
+		//Had some problem with the classes. So this says if no history dont push
 			if(Class !== undefined){
-				retval.push(Class);	
+				retclass.push(Class);	
 			}	
 		$("tr").each(function(){
 			var Id = $(this).attr('id');
 			
-			for(var i = 0; i < retval.length; i++){
-				if(Id == retval[i]){
-					//Toggle funktion viser og gemmer historik + giver en dejlig effekt
-					$(this).toggle(500);
-					$(this).css({"background-color": "#4B7089", "color": "white", "padding-left": "50px"});
+			for(var i = 0; i < retclass.length; i++){
+				if(Id == retclass[i]){
+					/*Toggle function that shows/hides history. Toggle also gives a nice effect.
+					Parameter for toggle is set to 500 to give a nice and not to slow show/hide effect*/
+					
+				
+						$(this).toggle(500);
+						//Color for history tables
+						$(this).css({"background-color": "#4B7089", "color": "white", "padding-left": "50px"});
+						
+		
+					
+
 				}
 			}	
 		})
-		console.log($(this).attr('class'));
+		console.log(retclass);
 	});
 };
+
 
