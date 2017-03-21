@@ -11,17 +11,20 @@
 </head>
 <body>
     <div class="container">
+    
        <?php
- 
+        /* This code gets the data from mysql and writes a Json file wich is used to show the data with javascript*/
         require_once("mysql\mysqli_connect.php");
 
 
         $response = array();
         $posts = array();
-        
+        //Selecting data i want from mysql
         $sql = "SELECT * FROM lagerb";
+        //Connecting to mysql and running a while statement to get all the data
         if($result = mysqli_query($dbc, $sql)){
             while($row = mysqli_fetch_assoc($result)){
+                //Giving names to the data (Some danish in there ignore it) also i put it in my posts array.
                 $posts["Produkt"] = $row["produk"];
                 $posts["Vægt-kg"] = $row["vægt"];
                 $posts["Batch-NR"] = $row["batch"];
@@ -31,12 +34,14 @@
                 $posts["Ny-udløb"] = $row["ny"];
                 $posts["Karantæne"] = $row["kara"];
                 $posts["Dato"] = $row["dato"];
+                //pushing all the data together so i can compress it to a json file
                 array_push($response, $posts);
                 
 
             }
             
         }
+        //Here i make my json file wich saves in the "scripts" folder
         $myPath = "scripts/";
         $myFile = $myPath."results.json";
         $fp = fopen($myFile, 'w');
