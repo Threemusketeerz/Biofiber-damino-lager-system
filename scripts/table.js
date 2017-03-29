@@ -8,7 +8,7 @@ Fell free to ask "Threemusketeerz", "Sporring55" if you have any questions about
 // $(document).ready(function(){	
 $.getJSON("scripts/results.json", function(data) {
 	var finArr = jsonSorter(data);
-	console.log(finArr);
+	// console.log(finArr);
 	htmlTable(".container", finArr);
 	$("table").addClass("table table-responsive table-striped table-hover");
 	
@@ -66,6 +66,7 @@ function htmlTable(selector, data, columns) {
 					var sub = document.createElement('td');
 					sub.textContent = d[k][columns[z]];
 					sub.id = 'sub' + j;
+			
 					subtr.appendChild(sub);	
 			}			
 				tbody.appendChild(subtr);
@@ -79,15 +80,16 @@ function htmlTable(selector, data, columns) {
 	sel.appendChild(tbe);
 	// Function for hiding history
 	$("tr").show(function(){
-		var hid = "hidden";
 		//Color for valid tables
 		$(this).css({"background-color": "#5BC0DE", "color": "white"});
 		//array: keeps id of hidden tables 
 		var retval = [];
+		var Id = $(this).attr("id");	
 		//running for every table row
 		$("tr").each(function(){
 			//Getting id of hidden 
 			var Id = $(this).attr('id');
+			
 			if(Id !== undefined){
 				retval.push(Id);	
 			}
@@ -95,43 +97,50 @@ function htmlTable(selector, data, columns) {
 			for(var i = 0; i < retval.length; i++){
 				//Simpel if statement for hiding history
 				if($(this).attr('id') == retval[i]){
-					$(this).hide();
-				}
-				
-			}
-		})
+					$(this).hide();		
+				}	
+			}	
+		})	
 	});
+	// Creating button to show more of history
+	var btn = document.createElement("BUTTON");
+	btn.id = "btn1";
+	var text = document.createTextNode("VIS MERE");
+	btn.appendChild(text);
+	
 //click function: click function is bacisly the same as hide function with small modifications
 	$("tr").click(function(event){
 		/*putting my push function outside of each function so it only pushes
 		the class of the clicked table row*/
+		var history = [];
 		var retclass = [];
 		var Class = $(this).attr('class');
+
 		//Had some problem with the classes. So this says if no history dont push
 			if(Class !== undefined){
 				retclass.push(Class);	
-			}	
-		$("tr").each(function(){
+			}
+			var hidden = $("tr:hidden").attr("id");
+			// $("tr:hidden").slice(Id.length -5, Id.length).hide();
+		$("tr").each(function(){	
 			var Id = $(this).attr('id');
-			
-			for(var i = 0; i < retclass.length; i++){
-				if(Id == retclass[i]){
-					/*Toggle function that shows/hides history. Toggle also gives a nice effect.
-					Parameter for toggle is set to 500 to give a nice and not to slow show/hide effect*/
-					
-				
-						$(this).toggle(500);
-						//Color for history tables
-						$(this).css({"background-color": "#4B7089", "color": "white", "padding-left": "50px"});
-						
-		
-					
-
-				}
-			}	
+			if(Id !== undefined){
+				if(Id == retclass){
+					//Push the id of hidden tables into an array for slice usage
+					history.push(Id);
+					var num = 0;
+					num = 5;					
+					//Here i slice tables that are hidden so it only shows 5 rows. Shown with toggle function for nice effect.	
+					var Cut = $(this).slice(history.length - num, history.length).toggle(500);
+					//Color for history tables
+					$(this).css({"background-color": "#4B7089", "color": "white", "padding-left": "50px"});
+					//Adding button to length of history
+					if(history.length == num){
+						$(this).append(btn);
+					}
+				}	
+			}
 		})
-		console.log(retclass);
-	});
+	});			
 };
-
 
