@@ -102,15 +102,17 @@ function htmlTable(selector, data, columns) {
 			}	
 		})	
 	});
-	// Creating button to show more of history
 	
 		
+		
 //click function: click function is bacisly the same as hide function with small modifications
-	var trClick = $("tr").click(function(e){
+	var trClick = $("tr").click(function(){
+		//Creating button to show more of history
 		var btn = document.createElement("BUTTON");
 		btn.id = "btn1";
 		var text = document.createTextNode("VIS MERE");
 		btn.appendChild(text);
+		
 		var num = 5;
 		/*putting my push function outside of each function so it only pushes
 		the class of the clicked table row*/
@@ -119,16 +121,15 @@ function htmlTable(selector, data, columns) {
 		var Class = $(this).attr('class');
 		//Creating counter to count presses
 		var clickCounter = $(this).data("clickCounter") || 0;
-		//incrementing clickCounter
+		// //incrementing clickCounter
 		var numClick = $(this).data("clickCounter", clickCounter += 1);
-		console.log(numClick);
 		//Had some problem with the classes. if no history dont push
 			if(Class !== undefined){
 				retclass.push(Class);	
 			}
 			var hidden = $("tr:hidden").attr("id");
 			// $("tr:hidden").slice(Id.length -5, Id.length).hide();
-		$("tr").each(function(){	
+		var ea = $("tr").each(function(){	
 			var Id = $(this).attr('id');
 			if(Id !== undefined){
 				if(Id == retclass){
@@ -139,18 +140,23 @@ function htmlTable(selector, data, columns) {
 					//Color for history tables
 					$(this).css({"background-color": "#4B7089", "color": "white", "padding-left": "50px"});
 					//Adding button to length of history 
+
 					if(history.length == num){
 						$(this).append(btn);
+					}						
 					//Deleting btn1 if visible tr is clicked twice
-					}if(clickCounter > 1 && numClick == numClick){
+					
+					if(clickCounter > 1 && numClick == numClick){
 						$("#btn1").remove();
+						$(this).hide(500);
 						$("tr").data("clickCounter", 0);
-					}	
+					}
+						
 				}	
 			}
 			
 		})
-		
-	});		
+			
+	});	
+	
 };
-
