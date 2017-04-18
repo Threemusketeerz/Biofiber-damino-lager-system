@@ -1,3 +1,4 @@
+// Search function
 $(document).ready(function(){
     $("#search").on("keyup", function(){
         function fSearch() {
@@ -12,6 +13,7 @@ $(document).ready(function(){
                 a = tr[i];
                 if(a.innerHTML.toUpperCase().indexOf(filter) > - 1){
                     tr[i].style.display = "";
+
                 }else if (a.innerHTML.toUpperCase().indexOf(filter) < -1){
                     tr[i].style.display = "none";
                 }else if(tr[i].style.display = "none"){
