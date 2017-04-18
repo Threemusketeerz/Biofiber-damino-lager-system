@@ -1,4 +1,3 @@
-
 <html>
 <head>
 
@@ -6,14 +5,17 @@
     <!--<script src="script.js"></script>-->
     <script src="scripts/jsonSort.js"></script>
     <script src="scripts/table.js"></script>
+    <script src="scripts/more.js"></script>
+    <script src="scripts/search.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-    
+        <input type="text" id="search" placeholder="Søg produkt">
        <?php
-        /* This code gets the data from mysql and writes a Json file wich is used to show the data with javascript*/
+        /* This code gets the data from mysql and writes a Json file 
+        wich is used to show the data with javascript*/
         require_once("mysql\mysqli_connect.php");
 
 
@@ -55,5 +57,6 @@
 ?>
  
     </div>
+
 </body>
 </html>

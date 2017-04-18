@@ -20,6 +20,7 @@ $.getJSON("scripts/results.json", function(data) {
 function htmlTable(selector, data, columns) {
 	var sel = document.querySelector(selector);
 	var tbe = document.createElement('table');
+	tbe.id = "myTable";
 	var thead = document.createElement('thead');
 	var tre = document.createElement('tr');
 	var tbody = document.createElement('tbody');
@@ -77,4 +78,9 @@ function htmlTable(selector, data, columns) {
 	// emptyDOMChildren(sel);
 	sel.appendChild(tbe);	
 };
+
+
+
+
+
 
