@@ -22,6 +22,7 @@ function htmlTable(selector, data, columns) {
 	var tbe = document.createElement('table');
 	tbe.id = "myTable";
 	var thead = document.createElement('thead');
+	thead.id = "myTh";
 	var tre = document.createElement('tr');
 	var tbody = document.createElement('tbody');
 	tbody.className = "myTable";

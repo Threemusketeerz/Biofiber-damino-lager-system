@@ -13,5 +13,19 @@
     background-color: white;
     color: black;
 }
-
+#search {
+    text-align: left;
+    border: 3px solid #5BC0DE;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.header {
+    text-align: center;
+}
+.container {
+    border-top: 3px solid #4B7089;
+    margin-top: 20px;
+}
 

@@ -11,8 +11,11 @@
     <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        <h1>LagerB database</h1>
+        </div>
     <div class="container">
-        <input type="text" id="search" placeholder="Søg produkt">
+        <input type="text" id="search" size="30" placeholder="Søg produkt">
        <?php
         /* This code gets the data from mysql and writes a Json file 
         wich is used to show the data with javascript*/

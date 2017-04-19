@@ -6,16 +6,24 @@ $(document).ready(function(){
             var retval = [];
             var Id = $(this).attr("id");	
             //running for every table row
-            //Getting id of hidden 
-            var btn = document.createElement("BUTTON");
-            var txt = document.createTextNode("vis mere");
-         
-            btn.appendChild(txt);
-            btn.id = "btn";
-            // for(var i = 0; i < btn.lengt)
-            if($(this).attr("class")){
-                $(this).append(btn);
-            }  
+            //Getting id of hidden
+
+            //Kmap til vis mere/mindre/luk-alle
+
+            // var btn = document.createElement("BUTTON");
+            // var txt = document.createTextNode("vis mere");
+            // btn.appendChild(txt);
+            
+            // btn.id = "btn";
+            // var btn1 = document.createElement("BUTTON");
+            // var txt1 = document.createTextNode("vis mindre");
+            // btn1.appendChild(txt1);
+            // btn1.id = "btn1";
+            // // for(var i = 0; i < btn.lengt)
+            // if($(this).attr("class")){
+            //     $(this).append(btn);
+            //     $(this).append(btn1);
+            // }  
                 
             $("tr").each(function(){
                 var Id = $(this).attr('id');
@@ -36,12 +44,12 @@ $(document).ready(function(){
             })
           	
         });
-       var num = 5;
+       var num = 0;
        var newNum = 5;
        var run;
          
         //click function: click function is bacisly the same as hide function with small modifications
-         var trClick = $("tr").on("click",function(e){
+        $("tr").on("click",function(e){
             var clickCounter = $(this).data("clickCounter") || 0;
  		    // //incrementing clickCounter
  		    var numClick = $(this).data("clickCounter", clickCounter += 5);
@@ -63,44 +71,28 @@ $(document).ready(function(){
                          history.push(Id);
            
                          //Here i slice tables that are hidden so it only shows 5 rows. Shown with toggle function for nice effect.  
-                        run = $(this).slice(history.length-num, history.length).show(500);
+                        $(this).slice(history.length-num, history.length).show(500);
                          //Color for history tables
                          $(this).css({"background-color": "#4B7089", "color": "white", "padding-left": "50px"});
-                   
-                            
-                         
-                         
-                         
-                        
-                        if(clickCounter > num){
- 						    $(this).hide(500);
- 						    $("tr").data("clickCounter", 0);
-                            num = 5;
- 					    }
                                   
                     }	
                  }
                  
              })
-
-        
-
-                $("button").on("click",function(){
-                  
-                        if(history.length > num){
-                            num = num+5; 
-                        }else {
-                            num = 5;
-                        }
-                        console.log(num);
-                 });
-         
-                
-            
-
+             
          })
+         //Knap til vis mere (TEST)
 
-         
-         
-        
+        //  var mere = document.getElementsByTagName("button");
+        //  function openClick(){
+        //   for(var i = 0; i < mere.length; i++){
+        //       if(mere[i].click() && mere[i].id == "btn"){
+        //          num += 5;
+        //       }
+
+        //   }
+        //  }
+     
+
+                
 });
